@@ -1,0 +1,6 @@
+{
+  "name": "Sanket Kandel Portfolio",
+  "description": "A highly responsive, modern, and interactive portfolio application for Sanket Kandel, featuring a password-protected admin panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
