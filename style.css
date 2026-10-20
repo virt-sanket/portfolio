@@ -1390,7 +1390,14 @@ select.form-input option { background: #090d1f; }
 /* --- Extracted Internal Styles --- */
 
 /* From blog.html */
-text-decoration: none;
+    .blog-featured {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      margin-bottom: 2.5rem;
+      text-decoration: none;
       color: inherit;
       transition: var(--transition);
       position: relative;

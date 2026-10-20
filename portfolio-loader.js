@@ -332,19 +332,22 @@
     if (!el) return;
     el.innerHTML = items.map(i => `
       <div class="timeline-item">
-        <div class="timeline-date">${esc(i.date)}</div>
-        <div class="timeline-role">${esc(i.role)}</div>
-        <div class="timeline-company">${esc(i.company)}</div>
-        <div class="timeline-desc">${esc(i.desc)}</div>
+        <span class="timeline-date">${esc(i.date)}</span>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">${esc(i.role)}</div>
+          <div class="timeline-company">${esc(i.company)}</div>
+          <div class="timeline-desc">${esc(i.desc)}</div>
+        </div>
       </div>`).join('');
   }
 
   function renderEducation(items) {
     const el = document.getElementById('dyn-education');
     if (!el) return;
-    el.innerHTML = items.map(i => `
-      <div class="edu-card glass">
-        <div class="edu-degree"><i class="${attr(i.icon || 'fa-solid fa-graduation-cap')}"></i> ${esc(i.degree)}</div>
+    el.innerHTML = items.map((i, idx) => `
+      <div class="edu-card glass" ${idx === 0 ? 'style="border-left: 3px solid var(--accent-cyan);"' : ''}>
+        <div class="edu-degree"><i class="${attr(i.icon || 'fa-solid fa-graduation-cap')} ${idx === 0 ? 'icon-cyan' : ''}"></i> ${esc(i.degree)}</div>
         <div class="edu-school">${esc(i.school)}</div>
         <div class="edu-year">${esc(i.year)}</div>
       </div>`).join('');
@@ -604,32 +607,37 @@
     const { posts = [] } = await get('/blog');
     if (!posts.length) return;
 
-    // Featured post
-    const featured = posts.find(p => p.featured) || posts[0];
+    // Featured post (only if explicitly marked featured: true)
+    const featured = posts.find(p => p.featured === true);
     const featEl = document.getElementById('dyn-blog-featured');
-    if (featEl && featured) {
-      featEl.href = `blog-post.html?slug=${attr(featured.slug || featured.id)}`;
-      featEl.innerHTML = `
-        <div class="blog-featured-img"><i class="${attr(featured.icon || 'fa-solid fa-newspaper')}"></i></div>
-        <div class="blog-featured-content">
-          <div class="blog-featured-label"><i class="fa-solid fa-star"></i> Featured Article</div>
-          <div class="blog-featured-title">${esc(featured.title)}</div>
-          <div class="blog-meta">
-            <span><i class="fa-regular fa-calendar"></i> ${esc(featured.date || '')}</span>
-            <span><i class="fa-regular fa-clock"></i> ${esc(featured.readTime || '')}</span>
-            <span class="badge badge-violet">${esc(featured.category || 'Engineering')}</span>
-          </div>
-          <div class="blog-featured-excerpt">${esc(featured.excerpt || '')}</div>
-          <div class="blog-read-more">Read Article <i class="fa-solid fa-arrow-right"></i></div>
-        </div>`;
+    if (featEl) {
+      if (featured) {
+        featEl.href = `blog-post.html?slug=${attr(featured.slug || featured.id)}`;
+        featEl.style.display = 'grid';
+        featEl.innerHTML = `
+          <div class="blog-featured-img"><i class="${attr(featured.icon || 'fa-solid fa-newspaper')}"></i></div>
+          <div class="blog-featured-content">
+            <div class="blog-featured-label"><i class="fa-solid fa-star"></i> Featured Article</div>
+            <div class="blog-featured-title">${esc(featured.title)}</div>
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> ${esc(featured.date || '')}</span>
+              <span><i class="fa-regular fa-clock"></i> ${esc(featured.readTime || '')}</span>
+              <span class="badge badge-violet">${esc(featured.category || 'Engineering')}</span>
+            </div>
+            <div class="blog-featured-excerpt">${esc(featured.excerpt || '')}</div>
+            <div class="blog-read-more">Read Article <i class="fa-solid fa-arrow-right"></i></div>
+          </div>`;
+      } else {
+        featEl.style.display = 'none';
+      }
     }
 
-    // Regular posts grid
-    const grid = document.getElementById('dyn-blog-grid');
+    // Posts grid (supports both #dyn-blog-posts and #dyn-blog-grid)
+    const grid = document.getElementById('dyn-blog-posts') || document.getElementById('dyn-blog-grid');
     if (grid) {
-      const regular = posts.filter(p => p.id !== featured?.id);
-      grid.innerHTML = (regular.length ? regular : posts).map(p => `
-        <a href="blog-post.html?slug=${attr(p.slug || p.id)}" class="blog-card glass reveal" data-category="${attr((p.category||'').toLowerCase())}">
+      const list = (featEl && featured) ? posts.filter(p => p.id !== featured.id) : posts;
+      grid.innerHTML = (list.length ? list : posts).map(p => `
+        <a href="blog-post.html?slug=${attr(p.slug || p.id)}" class="blog-card glass reveal" data-category="${attr((p.category || 'Engineering').toLowerCase())}">
           <div class="blog-card-icon"><i class="${attr(p.icon || 'fa-solid fa-code')} icon-cyan"></i></div>
           <div class="blog-meta">
             <span><i class="fa-regular fa-calendar"></i> ${esc(p.date || '')}</span>
@@ -650,24 +658,25 @@
   }
 
   function bindBlogFilters() {
-    const catBtns = document.querySelectorAll('.cat-btn');
-    catBtns.forEach(btn => {
+    const filterBtns = document.querySelectorAll('.filter-btn, .cat-btn, #blog-filter-bar button');
+    filterBtns.forEach(btn => {
       btn.onclick = () => {
-        catBtns.forEach(b => b.classList.remove('active'));
+        filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filter = btn.textContent.trim().toLowerCase();
-        const cards = document.querySelectorAll('#dyn-blog-grid .blog-card');
+        const filter = (btn.dataset.category || btn.textContent).trim().toLowerCase();
+        const cards = document.querySelectorAll('#dyn-blog-posts .blog-card, #dyn-blog-grid .blog-card');
         cards.forEach(card => {
           const cat = (card.dataset.category || '').toLowerCase();
-          if (filter === 'all') {
+          if (filter === 'all' || !filter) {
             card.style.display = '';
             return;
           }
           const isMatch = cat.includes(filter) ||
                           filter.includes(cat) ||
-                          (filter.includes('ai') && cat.includes('ai')) ||
-                          (filter.includes('cloud') && cat.includes('cloud')) ||
-                          (filter.includes('open source') && cat.includes('open source'));
+                          (filter.includes('ai') && (cat.includes('ai') || cat.includes('machine learning') || cat.includes('intelligence') || cat.includes('deep learning'))) ||
+                          (filter.includes('cloud') && (cat.includes('cloud') || cat.includes('aws') || cat.includes('architecture') || cat.includes('distributed'))) ||
+                          (filter.includes('react') && (cat.includes('react') || cat.includes('frontend'))) ||
+                          (filter.includes('devops') && (cat.includes('devops') || cat.includes('tooling') || cat.includes('docker') || cat.includes('kubernetes')));
           card.style.display = isMatch ? '' : 'none';
         });
       };

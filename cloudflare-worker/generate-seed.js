@@ -29,57 +29,57 @@ const DEFAULT_ABOUT = {
   currentFocus: "MSc CS • Cloud & AI",
   timeline: [
     {
-      date: "2024 – Present",
-      role: "Senior Full-Stack Engineer",
-      company: "Independent / Freelance",
-      desc: "Architecting cloud-native applications and AI-driven workflows for international clients across US, Europe, and Asia. Leading architecture and full-stack delivery."
+      date: "2023 — Present",
+      role: "Lead Full-Stack Developer",
+      company: "Nexus Cloud Systems • Remote",
+      desc: "Leading architecture of distributed SaaS microservices. Migrated core monolithic services to event-driven serverless architecture, reducing latency by 42%. Mentoring 6 junior and mid-level engineers."
     },
     {
-      date: "2022 – 2024",
-      role: "Full-Stack Developer",
-      company: "Apex Digital Solutions",
-      desc: "Built and scaled multi-tenant SaaS products using React, Next.js, Node.js, and AWS. Improved core API response times by 40% and reduced cloud infrastructure costs."
+      date: "2021 — 2023",
+      role: "Cloud & Backend Engineer",
+      company: "Apex Digital Solutions • Kathmandu",
+      desc: "Architected REST APIs, database schemas, and background worker queues with Python and Node.js. Integrated Stripe, SendGrid, and AWS services. Built internal developer dashboard saving 15 engineering hours weekly."
     },
     {
-      date: "2020 – 2022",
-      role: "Frontend Engineer",
-      company: "WebSphere Tech",
-      desc: "Developed responsive, accessible, high-performance web interfaces for 20+ client projects. Established company-wide component library and design system."
+      date: "2019 — 2021",
+      role: "Junior Web Developer",
+      company: "Freelance & Community",
+      desc: "Built custom responsive websites, client dashboards, and interactive UI components. Learned fundamentals of systems programming, database indexing, and network protocols."
     }
   ],
   education: [
     {
-      degree: "MSc in Computer Science",
-      school: "York St John University, UK",
-      year: "2026 – Present",
+      degree: "MSc Computer Science",
+      school: "York St John University, United Kingdom",
+      year: "2026 – Present · Postgraduate Degree",
       icon: "fa-solid fa-graduation-cap"
     },
     {
-      degree: "B.Sc. in Computer Science & Information Technology",
-      school: "Tribhuvan University",
-      year: "2018 – 2022",
+      degree: "B.Sc. Computer Science",
+      school: "Tribhuvan University, Kathmandu",
+      year: "2016 – 2020 · First Division",
       icon: "fa-solid fa-user-graduate"
     },
     {
-      degree: "AWS Certified Solutions Architect",
-      school: "Amazon Web Services",
-      year: "2023",
-      icon: "fa-brands fa-aws"
+      degree: "Google Cloud Professional Engineer",
+      school: "Google Cloud",
+      year: "2024 · Active",
+      icon: "fa-brands fa-google"
     },
     {
-      degree: "Certified Kubernetes Administrator (CKA)",
-      school: "Cloud Native Computing Foundation",
-      year: "2024",
-      icon: "fa-solid fa-cloud"
+      degree: "AWS Certified Developer – Associate",
+      school: "Amazon Web Services",
+      year: "2023 · Active",
+      icon: "fa-brands fa-aws"
     }
   ],
   interests: [
-    { label: "Himalayan Trekking", icon: "fa-solid fa-mountain" },
+    { label: "Hiking & Mountains", icon: "fa-solid fa-mountain-sun" },
+    { label: "Photography", icon: "fa-solid fa-camera" },
     { label: "Open Source", icon: "fa-brands fa-github" },
     { label: "Generative AI", icon: "fa-solid fa-brain" },
-    { label: "Cloud Systems", icon: "fa-solid fa-server" },
-    { label: "Specialty Coffee", icon: "fa-solid fa-mug-hot" },
-    { label: "Photography", icon: "fa-solid fa-camera" }
+    { label: "Distributed Systems", icon: "fa-solid fa-server" },
+    { label: "Specialty Coffee", icon: "fa-solid fa-mug-hot" }
   ]
 };
 
