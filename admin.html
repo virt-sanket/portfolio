@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Sanket Kandel</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="login-screen">
+  <div class="login-bg">
+    <div class="login-orb login-orb-1"></div>
+    <div class="login-orb login-orb-2"></div>
+    <div class="login-grid"></div>
+  </div>
+  <div class="login-card glass">
+    <div class="login-logo">SK</div>
+    <h1 class="login-title">Admin Portal</h1>
+    <p class="login-sub">Secure access via OTP to your registered email</p>
+
+    <div id="step-request" class="login-step active">
+      <div class="login-email-display">
+        <i class="fa-solid fa-envelope"></i>
+        <span>kandel.sanket@gmail.com</span>
+      </div>
+      <button id="btn-send-otp" class="btn-login" onclick="sendOTP()">
+        <span id="send-otp-text"><i class="fa-solid fa-paper-plane"></i> Send OTP</span>
+        <span id="send-otp-loading" class="hidden"><i class="fa-solid fa-spinner fa-spin"></i> Sending…</span>
+      </button>
+    </div>
+
+    <div id="step-verify" class="login-step">
+      <p class="otp-hint">Enter the 6-digit code sent to your email</p>
+      <div class="otp-inputs" id="otp-inputs">
+        <input class="otp-input" type="text" maxlength="1" inputmode="numeric" id="otp-0" />
+        <input class="otp-input" type="text" maxlength="1" inputmode="numeric" id="otp-1" />
+        <input class="otp-input" type="text" maxlength="1" inputmode="numeric" id="otp-2" />
+        <input class="otp-input" type="text" maxlength="1" inputmode="numeric" id="otp-3" />
+        <input class="otp-input" type="text" maxlength="1" inputmode="numeric" id="otp-4" />
+        <input class="otp-input" type="text" maxlength="1" inputmode="numeric" id="otp-5" />
+      </div>
+      <div id="otp-timer" class="otp-timer">Expires in <span id="timer-val">10:00</span></div>
+      <button class="btn-login" onclick="verifyOTP()">
+        <span id="verify-text"><i class="fa-solid fa-unlock"></i> Verify &amp; Enter</span>
+        <span id="verify-loading" class="hidden"><i class="fa-solid fa-spinner fa-spin"></i> Verifying…</span>
+      </button>
+      <button class="btn-link" onclick="goBack()">&#8592; Try again</button>
+    </div>
+
+    <div id="login-error" class="login-error hidden"></div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="admin-app" class="admin-app hidden">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo">SK</div>
+      <div>
+        <div class="sidebar-title">Admin Panel</div>
+        <div class="sidebar-sub">Sanket Kandel</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Overview</div>
+      <button class="nav-item active" data-section="dashboard" onclick="switchSection('dashboard')">
+        <i class="fa-solid fa-chart-line"></i> Dashboard
+      </button>
+
+      <div class="nav-group-label">Content</div>
+      <button class="nav-item" data-section="hero" onclick="switchSection('hero')">
+        <i class="fa-solid fa-house"></i> Hero &amp; Home
+      </button>
+      <button class="nav-item" data-section="about" onclick="switchSection('about')">
+        <i class="fa-solid fa-user"></i> About
+      </button>
+      <button class="nav-item" data-section="projects" onclick="switchSection('projects')">
+        <i class="fa-solid fa-rocket"></i> Projects
+      </button>
+      <button class="nav-item" data-section="skills" onclick="switchSection('skills')">
+        <i class="fa-solid fa-bolt"></i> Skills
+      </button>
+      <button class="nav-item" data-section="blog" onclick="switchSection('blog')">
+        <i class="fa-solid fa-pen-nib"></i> Blog
+      </button>
+      <button class="nav-item" data-section="contact" onclick="switchSection('contact')">
+        <i class="fa-solid fa-paper-plane"></i> Contact &amp; Links
+      </button>
+
+      <div class="nav-group-label">Site &amp; Layout</div>
+      <button class="nav-item" data-section="header-footer" onclick="switchSection('header-footer')">
+        <i class="fa-solid fa-window-maximize"></i> Header &amp; Footer
+      </button>
+      <button class="nav-item" data-section="themes" onclick="switchSection('themes')">
+        <i class="fa-solid fa-palette"></i> Themes &amp; Appearance
+      </button>
+      <button class="nav-item" data-section="settings" onclick="switchSection('settings')">
+        <i class="fa-solid fa-gear"></i> SEO &amp; Meta
+      </button>
+      <button class="nav-item" data-section="messages" onclick="switchSection('messages')">
+        <i class="fa-solid fa-inbox"></i> Messages
+        <span class="badge-count" id="msg-count">0</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="index.html" target="_blank" class="nav-item">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Site
+      </a>
+      <button class="nav-item logout-btn" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <div class="admin-main" id="admin-main">
+    <header class="topbar">
+      <button class="topbar-menu" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-right">
+        <div class="topbar-status">
+          <span class="status-dot-green"></span>
+          <span id="save-status">All changes saved</span>
+        </div>
+        <div class="topbar-avatar">SK</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section id="section-dashboard" class="admin-section active">
+      <div class="section-header">
+        <h2>Dashboard</h2>
+        <p>Real-time overview of your portfolio performance</p>
+      </div>
+      <div class="analytics-grid">
+        <div class="analytics-card glass">
+          <div class="analytics-icon" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)"><i class="fa-solid fa-eye"></i></div>
+          <div><div class="analytics-val" id="stat-today">—</div><div class="analytics-label">Visitors Today</div></div>
+        </div>
+        <div class="analytics-card glass">
+          <div class="analytics-icon" style="background:linear-gradient(135deg,#0891b2,#06b6d4)"><i class="fa-solid fa-users"></i></div>
+          <div><div class="analytics-val" id="stat-week">—</div><div class="analytics-label">This Week</div></div>
+        </div>
+        <div class="analytics-card glass">
+          <div class="analytics-icon" style="background:linear-gradient(135deg,#059669,#10b981)"><i class="fa-solid fa-file-arrow-down"></i></div>
+          <div><div class="analytics-val" id="stat-cv">—</div><div class="analytics-label">CV Downloads</div></div>
+        </div>
+        <div class="analytics-card glass">
+          <div class="analytics-icon" style="background:linear-gradient(135deg,#db2777,#f43f5e)"><i class="fa-solid fa-inbox"></i></div>
+          <div><div class="analytics-val" id="stat-messages">—</div><div class="analytics-label">New Messages</div></div>
+        </div>
+      </div>
+
+      <div class="dash-grid-2">
+        <div class="glass-card">
+          <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <h3><i class="fa-solid fa-chart-area"></i> Visitor &amp; View Trends (7 days)</h3>
+            <div style="font-size:12px;display:flex;gap:12px;">
+              <span style="color:#06b6d4;"><i class="fa-solid fa-circle" style="font-size:9px;"></i> Pageviews</span>
+              <span style="color:#a78bfa;"><i class="fa-solid fa-circle" style="font-size:9px;"></i> Unique Visitors</span>
+            </div>
+          </div>
+          <div class="chart-wrap"><canvas id="visitors-chart" height="180"></canvas></div>
+        </div>
+        <div class="glass-card">
+          <div class="card-header"><h3><i class="fa-solid fa-globe"></i> Top Pages</h3></div>
+          <div id="top-pages-list" class="top-pages-list"><div class="loading-dots"><span></span><span></span><span></span></div></div>
+        </div>
+      </div>
+
+      <div class="dash-grid-2">
+        <div class="glass-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-pen-nib"></i> Recent Blog Posts</h3>
+            <button class="btn-sm" onclick="switchSection('blog')">Manage</button>
+          </div>
+          <div id="dash-blogs" class="dash-list"><div class="loading-dots"><span></span><span></span><span></span></div></div>
+        </div>
+        <div class="glass-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-envelope"></i> Recent Messages</h3>
+            <button class="btn-sm" onclick="switchSection('messages')">View all</button>
+          </div>
+          <div id="dash-messages" class="dash-list"><div class="loading-dots"><span></span><span></span><span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HERO -->
+    <section id="section-hero" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-house"></i> Hero &amp; Home</h2>
+        <button class="btn-save" onclick="saveSection('hero')"><i class="fa-solid fa-cloud-arrow-up"></i> Save Changes</button>
+      </div>
+      <div class="form-grid">
+        <div class="glass-card form-card">
+          <h3>Identity</h3>
+          <div class="field-group"><label>Your Name</label><input type="text" id="hero-name" class="admin-input" placeholder="Sanket Kandel" /></div>
+          <div class="field-group"><label>Tagline / Eyebrow text</label><input type="text" id="hero-eyebrow" class="admin-input" placeholder="Available for work" /></div>
+          <div class="field-group"><label>Bio Paragraph</label><textarea id="hero-bio" class="admin-textarea" rows="4"></textarea></div>
+          <div class="field-group"><label>Status Badge Text</label><input type="text" id="hero-status" class="admin-input" placeholder="Open to work" /></div>
+        </div>
+        <div class="glass-card form-card">
+          <h3>Typewriter Words</h3>
+          <p class="field-hint">One per line — these rotate in the hero animation</p>
+          <textarea id="hero-typewriter" class="admin-textarea" rows="6" placeholder="Full-Stack Developer&#10;Open-Source Enthusiast&#10;UI/UX Craftsman&#10;Cloud Architect"></textarea>
+        </div>
+        <div class="glass-card form-card">
+          <h3>Stats Strip</h3>
+          <div class="stats-edit-grid">
+            <div class="field-group"><label>Years Experience</label><input type="text" id="stat-years" class="admin-input" placeholder="5+" /></div>
+            <div class="field-group"><label>Projects Delivered</label><input type="text" id="stat-projects-count" class="admin-input" placeholder="40+" /></div>
+            <div class="field-group"><label>GitHub Stars</label><input type="text" id="stat-stars" class="admin-input" placeholder="3k+" /></div>
+            <div class="field-group"><label>Happy Clients</label><input type="text" id="stat-clients" class="admin-input" placeholder="12+" /></div>
+          </div>
+        </div>
+        <div class="glass-card form-card">
+          <h3>Avatar Image</h3>
+          <div class="avatar-upload-wrap">
+            <img id="avatar-preview" src="assets/avatar.jpg" alt="Avatar" class="avatar-preview" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'%3E%3Crect width=\'120\' height=\'120\' fill=\'%23374151\'/%3E%3Ctext x=\'60\' y=\'75\' text-anchor=\'middle\' font-size=\'40\' fill=\'%23818cf8\' font-family=\'Arial\'%3ESK%3C/text%3E%3C/svg%3E'" />
+            <div class="avatar-upload-controls">
+              <input type="file" id="avatar-file" accept="image/*" style="display:none" onchange="previewAvatar(event)" />
+              <button class="btn-sm" onclick="document.getElementById('avatar-file').click()"><i class="fa-solid fa-upload"></i> Upload New</button>
+              <p class="field-hint">Recommended: 400x400px, JPG/PNG/WebP</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="section-about" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-user"></i> About Page</h2>
+        <button class="btn-save" onclick="saveSection('about')"><i class="fa-solid fa-cloud-arrow-up"></i> Save Changes</button>
+      </div>
+      <div class="form-grid">
+        <div class="glass-card form-card span-2">
+          <h3>Bio Text</h3>
+          <div class="field-group"><label>Paragraph 1</label><textarea id="about-p1" class="admin-textarea" rows="3"></textarea></div>
+          <div class="field-group"><label>Paragraph 2</label><textarea id="about-p2" class="admin-textarea" rows="3"></textarea></div>
+          <div class="field-group"><label>Paragraph 3</label><textarea id="about-p3" class="admin-textarea" rows="3"></textarea></div>
+          <div class="field-group"><label>Current Focus (floating card)</label><input type="text" id="about-focus" class="admin-input" placeholder="Cloud & AI" /></div>
+        </div>
+        <div class="glass-card form-card span-2">
+          <div class="card-header">
+            <h3>Work Experience Timeline</h3>
+            <button class="btn-sm" onclick="addTimelineItem()"><i class="fa-solid fa-plus"></i> Add Entry</button>
+          </div>
+          <div id="timeline-editor" class="repeater"></div>
+        </div>
+        <div class="glass-card form-card span-2">
+          <div class="card-header">
+            <h3>Education &amp; Certifications</h3>
+            <button class="btn-sm" onclick="addEducationItem()"><i class="fa-solid fa-plus"></i> Add Entry</button>
+          </div>
+          <div id="education-editor" class="repeater"></div>
+        </div>
+        <div class="glass-card form-card span-2">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-lightbulb"></i> Core Beliefs &amp; Philosophy</h3>
+            <button class="btn-sm" onclick="addBeliefItem()"><i class="fa-solid fa-plus"></i> Add Belief</button>
+          </div>
+          <p class="field-hint" style="margin-bottom:8px;">Your personal engineering principles displayed on the About page.</p>
+          <div id="beliefs-editor" class="repeater"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="section-projects" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-rocket"></i> Projects</h2>
+        <button class="btn-save" onclick="openProjectModal()"><i class="fa-solid fa-plus"></i> Add Project</button>
+      </div>
+      <div id="projects-table-wrap" class="glass-card">
+        <table class="admin-table">
+          <thead><tr><th>Name</th><th>Category</th><th>Status</th><th>Featured</th><th>Actions</th></tr></thead>
+          <tbody id="projects-tbody"><tr><td colspan="5" class="table-loading"><div class="loading-dots"><span></span><span></span><span></span></div></td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="glass-card form-card" style="margin-top:20px;">
+        <div class="card-header">
+          <h3><i class="fa-brands fa-github"></i> Open Source Contributions</h3>
+          <div style="display:flex;gap:8px;">
+            <button class="btn-sm" onclick="addOssItem()"><i class="fa-solid fa-plus"></i> Add Contribution</button>
+            <button class="btn-sm" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff;" onclick="saveOss()"><i class="fa-solid fa-cloud-arrow-up"></i> Save Contributions</button>
+          </div>
+        </div>
+        <p class="field-hint" style="margin-bottom:8px;">Featured open source contributions and pull requests on the Projects page.</p>
+        <div id="oss-editor" class="repeater"></div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="section-skills" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-bolt"></i> Skills</h2>
+        <button class="btn-save" onclick="saveSection('skills')"><i class="fa-solid fa-cloud-arrow-up"></i> Save Changes</button>
+      </div>
+      <div class="glass-card form-card">
+        <div class="card-header">
+          <h3>Skill Groups</h3>
+          <button class="btn-sm" onclick="addSkillGroup()"><i class="fa-solid fa-plus"></i> Add Group</button>
+        </div>
+        <div id="skills-editor" class="repeater"></div>
+      </div>
+
+      <div class="glass-card form-card" style="margin-top:20px;">
+        <div class="card-header">
+          <h3><i class="fa-solid fa-wrench"></i> Tools of the Trade (Tech Stack)</h3>
+          <button class="btn-sm" onclick="addTechItem()"><i class="fa-solid fa-plus"></i> Add Tool</button>
+        </div>
+        <p class="field-hint" style="margin-bottom:8px;">Interactive tool badges shown in the Skills section.</p>
+        <div id="tech-stack-editor" class="repeater"></div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="section-blog" class="admin-section">
+      <div class="section-header">
+        <div>
+          <h2><i class="fa-solid fa-pen-nib"></i> Blog Posts</h2>
+          <p style="color:var(--text-muted);font-size:12px;margin-top:4px;">
+            <i class="fa-solid fa-robot" style="color:#06b6d4;"></i> Auto-generates twice daily at <strong>7:00 AM &amp; 7:00 PM NPT</strong> (01:15 &amp; 13:15 UTC) and auto-shares to <i class="fa-brands fa-x-twitter" style="color:#fff;"></i> X.
+          </p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <button type="button" class="btn-sm" id="btn-generate-ai-blog" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff;font-weight:600;" onclick="generateAIBlogPost()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI News Post Now
+          </button>
+          <button type="button" class="btn-save" onclick="openBlogEditor()"><i class="fa-solid fa-plus"></i> New Post</button>
+        </div>
+      </div>
+      <div id="blog-list-view">
+        <div id="blog-table-wrap" class="glass-card">
+          <table class="admin-table">
+            <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Date</th><th>Read Time</th><th>Actions</th></tr></thead>
+            <tbody id="blog-tbody"><tr><td colspan="6" class="table-loading"><div class="loading-dots"><span></span><span></span><span></span></div></td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="blog-editor-view" class="hidden">
+        <div class="blog-editor-topbar">
+          <button class="btn-back" onclick="closeBlogEditor()"><i class="fa-solid fa-arrow-left"></i> Back to Posts</button>
+          <div class="blog-editor-actions">
+            <select id="blog-status-select" class="admin-select">
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+            </select>
+            <button class="btn-save" onclick="saveBlogPost()"><i class="fa-solid fa-cloud-arrow-up"></i> Save Post</button>
+          </div>
+        </div>
+        <div class="blog-editor-layout">
+          <div class="blog-editor-main">
+            <input type="hidden" id="blog-editing-id" />
+            <input type="text" id="blog-title-input" class="blog-title-input" placeholder="Post title…" oninput="updateSlug(this.value)" />
+            <div class="blog-meta-row">
+              <input type="text" id="blog-slug-input" class="admin-input slug-input" placeholder="post-slug" />
+              <select id="blog-category-select" class="admin-select">
+                <option value="Engineering">Engineering</option>
+                <option value="Cloud &amp; DevOps">Cloud &amp; DevOps</option>
+                <option value="AI &amp; ML">AI &amp; ML</option>
+                <option value="Open Source">Open Source</option>
+                <option value="Career">Career</option>
+              </select>
+              <span class="read-time-badge"><i class="fa-regular fa-clock"></i> <span id="blog-readtime">0 min read</span></span>
+            </div>
+            <div class="field-group">
+              <label>Excerpt (shown in blog listing)</label>
+              <textarea id="blog-excerpt-input" class="admin-textarea" rows="2" placeholder="Short description…"></textarea>
+            </div>
+            <div class="editor-toolbar" id="editor-toolbar">
+              <button title="Bold" onclick="execCmd('bold')"><i class="fa-solid fa-bold"></i></button>
+              <button title="Italic" onclick="execCmd('italic')"><i class="fa-solid fa-italic"></i></button>
+              <button title="Underline" onclick="execCmd('underline')"><i class="fa-solid fa-underline"></i></button>
+              <div class="toolbar-sep"></div>
+              <button title="H2" onclick="execCmd('formatBlock','h2')"><b>H2</b></button>
+              <button title="H3" onclick="execCmd('formatBlock','h3')"><b>H3</b></button>
+              <div class="toolbar-sep"></div>
+              <button title="Bullet list" onclick="execCmd('insertUnorderedList')"><i class="fa-solid fa-list-ul"></i></button>
+              <button title="Numbered list" onclick="execCmd('insertOrderedList')"><i class="fa-solid fa-list-ol"></i></button>
+              <div class="toolbar-sep"></div>
+              <button title="Code" onclick="execCmd('formatBlock','pre')"><i class="fa-solid fa-code"></i></button>
+              <button title="Quote" onclick="execCmd('formatBlock','blockquote')"><i class="fa-solid fa-quote-left"></i></button>
+              <div class="toolbar-sep"></div>
+              <button title="Link" onclick="insertLink()"><i class="fa-solid fa-link"></i></button>
+              <button title="Clear" onclick="execCmd('removeFormat')"><i class="fa-solid fa-remove-format"></i></button>
+            </div>
+            <div id="blog-content-editor" class="blog-content-editor" contenteditable="true" data-placeholder="Start writing your post…" oninput="updateReadTime()"></div>
+          </div>
+          <aside class="blog-editor-sidebar">
+            <div class="glass-card form-card">
+              <h4>Featured Post?</h4>
+              <label class="toggle-label">
+                <input type="checkbox" id="blog-featured" class="toggle-input" />
+                <span class="toggle-track"></span>
+                <span>Mark as featured</span>
+              </label>
+            </div>
+            <div class="glass-card form-card">
+              <h4>Tags</h4>
+              <input type="text" id="blog-tags-input" class="admin-input" placeholder="Add tag + Enter" onkeydown="addTag(event)" />
+              <div id="blog-tags-container" class="tags-container"></div>
+            </div>
+            <div class="glass-card form-card">
+              <h4>Icon (FontAwesome class)</h4>
+              <input type="text" id="blog-icon-input" class="admin-input" placeholder="fa-solid fa-cloud" />
+              <div class="icon-preview" id="icon-preview"><i class="fa-solid fa-pen"></i></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="section-contact" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-paper-plane"></i> Contact &amp; Social Links</h2>
+        <button class="btn-save" onclick="saveSection('contact')"><i class="fa-solid fa-cloud-arrow-up"></i> Save Changes</button>
+      </div>
+      <div class="form-grid">
+        <div class="glass-card form-card span-2">
+          <h3><i class="fa-solid fa-heading"></i> Page Headings &amp; Intro</h3>
+          <div class="form-row-2">
+            <div class="field-group">
+              <label>Hero Badge / Pill Tag</label>
+              <input type="text" id="contact-badge" class="admin-input" placeholder="Let's Connect" />
+            </div>
+            <div class="field-group">
+              <label>Hero Title (Supports HTML)</label>
+              <input type="text" id="contact-hero-title" class="admin-input" placeholder="Get In <span class='gradient-text'>Touch</span>" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Hero Subtitle</label>
+            <input type="text" id="contact-hero-sub" class="admin-input" placeholder="Have a project in mind? Looking for a collaborator? Or just want to say hello? I'd love to hear from you." />
+          </div>
+          <div class="form-row-2">
+            <div class="field-group">
+              <label>Info Section Title</label>
+              <input type="text" id="contact-info-title" class="admin-input" placeholder="Let's Build <span class='gradient-text'>Something</span> Together" />
+            </div>
+            <div class="field-group">
+              <label>Info Section Description</label>
+              <textarea id="contact-info-desc" class="admin-textarea" rows="2" placeholder="I'm currently available for freelance projects, full-time roles, speaking engagements, and interesting technical collaborations."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card form-card">
+          <h3><i class="fa-solid fa-address-card"></i> Contact Info &amp; Status</h3>
+          <div class="field-group"><label>Email Address</label><input type="email" id="contact-email" class="admin-input" /></div>
+          <div class="field-group"><label>Phone Number</label><input type="text" id="contact-phone" class="admin-input" placeholder="+977 9840505190" /></div>
+          <div class="field-group"><label>Location</label><input type="text" id="contact-location" class="admin-input" placeholder="Gaindakot, Nepal" /></div>
+          <div class="field-group"><label>Timezone</label><input type="text" id="contact-timezone" class="admin-input" placeholder="NPT (UTC +5:45)" /></div>
+          <div class="field-group"><label>Availability Status</label><input type="text" id="contact-availability" class="admin-input" placeholder="Available for new projects" /></div>
+          <div class="field-group"><label>Response Time Subtitle</label><input type="text" id="contact-reply-time" class="admin-input" placeholder="Typically replies in 24h" /></div>
+          <div class="field-group"><label>Form Privacy Note</label><input type="text" id="contact-note" class="admin-input" placeholder="Your data is private and will never be shared." /></div>
+        </div>
+
+        <div class="glass-card form-card">
+          <h3><i class="fa-solid fa-share-nodes"></i> Social Links &amp; Map Card</h3>
+          <div class="field-group"><label><i class="fa-brands fa-github"></i> GitHub URL</label><input type="url" id="social-github" class="admin-input" /></div>
+          <div class="field-group"><label><i class="fa-brands fa-linkedin"></i> LinkedIn URL</label><input type="url" id="social-linkedin" class="admin-input" /></div>
+          <div class="field-group"><label><i class="fa-brands fa-x-twitter"></i> Twitter/X URL</label><input type="url" id="social-twitter" class="admin-input" /></div>
+          <div class="field-group"><label><i class="fa-brands fa-instagram"></i> Instagram URL</label><input type="url" id="social-instagram" class="admin-input" /></div>
+          <div class="field-group" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+            <label><i class="fa-solid fa-map-location-dot"></i> Map Box Title</label>
+            <input type="text" id="contact-map-title" class="admin-input" placeholder="Based in Gaindakot, Nepal" />
+          </div>
+          <div class="field-group">
+            <label><i class="fa-solid fa-globe"></i> Map Box Subtitle</label>
+            <input type="text" id="contact-map-sub" class="admin-input" placeholder="Working remotely with clients across North America, Europe, and Asia-Pacific" />
+          </div>
+        </div>
+
+        <div class="glass-card form-card span-2">
+          <h3><i class="fa-solid fa-file-invoice"></i> Contact Page CV Card Text</h3>
+          <div class="form-row-2">
+            <div class="field-group">
+              <label>CV Card Label</label>
+              <input type="text" id="contact-cv-label" class="admin-input" placeholder="Curriculum Vitae" />
+            </div>
+            <div class="field-group">
+              <label>CV Card Subtitle</label>
+              <input type="text" id="contact-cv-sub" class="admin-input" placeholder="Download Official Resume" />
+            </div>
+          </div>
+        </div>
+        <div class="glass-card form-card span-2 cv-manager-card">
+          <div class="cv-status-header">
+            <div>
+              <h3 style="margin-bottom:4px;"><i class="fa-solid fa-file-pdf" style="color:#f43f5e"></i> CV / Resume Manager</h3>
+              <p style="color:var(--text-muted);font-size:12px;">Stored permanently in Cloudflare KV database. Updates reflect instantly across all pages without cache lag.</p>
+            </div>
+            <div id="cv-status-badge" class="cv-status-badge">
+              <span class="cv-status-dot"></span>
+              <span id="cv-status-text">Checking file…</span>
+            </div>
+          </div>
+
+          <div class="cv-meta-grid">
+            <div class="cv-meta-box">
+              <div class="cv-meta-label">Stored File Name</div>
+              <div class="cv-meta-val" id="cv-meta-filename">—</div>
+            </div>
+            <div class="cv-meta-box">
+              <div class="cv-meta-label">File Size</div>
+              <div class="cv-meta-val" id="cv-meta-size">—</div>
+            </div>
+            <div class="cv-meta-box">
+              <div class="cv-meta-label">Last Uploaded</div>
+              <div class="cv-meta-val" id="cv-meta-date">—</div>
+            </div>
+          </div>
+
+          <div class="cv-actions-row">
+            <input type="file" id="cv-file" accept=".pdf" style="display:none" onchange="uploadCV(event)" />
+            <button type="button" class="btn-cv-upload" id="btn-upload-cv" onclick="document.getElementById('cv-file').click()">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Upload New PDF CV
+            </button>
+            <a id="cv-view-link" href="/api/public/file/cv" target="_blank" rel="noopener noreferrer" class="btn-cv-preview">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Preview &amp; Test Download
+            </a>
+          </div>
+
+          <div style="margin-top:8px;padding-top:14px;border-top:1px solid var(--border);">
+            <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:6px;">External URL Fallback (optional Google Drive or Dropbox link):</label>
+            <input type="url" id="cv-url" class="admin-input" placeholder="https://…/resume.pdf" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEADER & FOOTER -->
+    <section id="section-header-footer" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-window-maximize"></i> Header &amp; Footer Layout</h2>
+        <button class="btn-save" onclick="saveSection('header-footer')"><i class="fa-solid fa-cloud-arrow-up"></i> Save Changes</button>
+      </div>
+      <div class="form-grid">
+        <div class="glass-card form-card">
+          <h3><i class="fa-solid fa-bars"></i> Navbar &amp; Header</h3>
+          <div class="field-group">
+            <label>Logo Text / Full Name</label>
+            <input type="text" id="header-logo-text" class="admin-input" placeholder="Sanket Kandel" />
+          </div>
+          <div class="field-group">
+            <label>Logo Initials / Badge</label>
+            <input type="text" id="header-logo-sub" class="admin-input" placeholder="SK" />
+          </div>
+          <div class="field-group">
+            <label>Availability Badge Status</label>
+            <input type="text" id="header-availability-text" class="admin-input" placeholder="Available for work" />
+          </div>
+          <div class="field-group">
+            <label>Hire Me CTA Button Text</label>
+            <input type="text" id="header-hire-btn-text" class="admin-input" placeholder="Hire Me" />
+          </div>
+          <div class="field-group">
+            <label>Hire Me CTA Link Target</label>
+            <input type="text" id="header-hire-btn-link" class="admin-input" placeholder="contact.html" />
+          </div>
+        </div>
+
+        <div class="glass-card form-card">
+          <h3><i class="fa-solid fa-shoe-prints"></i> Footer Layout</h3>
+          <div class="field-group">
+            <label>Footer Brand Name</label>
+            <input type="text" id="footer-logo-text" class="admin-input" placeholder="Sanket Kandel" />
+          </div>
+          <div class="field-group">
+            <label>Footer Tagline</label>
+            <input type="text" id="footer-tagline" class="admin-input" placeholder="Architecting resilient cloud &amp; distributed web systems." />
+          </div>
+          <div class="field-group">
+            <label>Copyright Text</label>
+            <input type="text" id="footer-copy" class="admin-input" placeholder="&copy; 2026 Sanket Kandel. All rights reserved." />
+          </div>
+          <div class="field-group">
+            <label>GitHub Social URL</label>
+            <input type="url" id="footer-social-github" class="admin-input" placeholder="https://github.com/..." />
+          </div>
+          <div class="field-group">
+            <label>LinkedIn Social URL</label>
+            <input type="url" id="footer-social-linkedin" class="admin-input" placeholder="https://linkedin.com/in/..." />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THEMES & APPEARANCE -->
+    <section id="section-themes" class="admin-section">
+      <div class="section-header">
+        <div>
+          <h2><i class="fa-solid fa-palette"></i> Themes &amp; Appearance</h2>
+          <p style="color:var(--text-muted);font-size:13px;margin-top:4px;">Select the default theme for your portfolio. Changes apply immediately across the website with smooth CSS transitions.</p>
+        </div>
+      </div>
+      <div class="theme-grid-admin" id="theme-grid-admin">
+        <!-- 6 Visual Theme Cards populated by admin.js -->
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="section-settings" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-gear"></i> SEO &amp; Site Meta</h2>
+        <button class="btn-save" onclick="saveSection('settings')"><i class="fa-solid fa-cloud-arrow-up"></i> Save SEO Settings</button>
+      </div>
+      <div class="form-grid">
+        <div class="glass-card form-card span-2">
+          <h3><i class="fa-solid fa-magnifying-glass"></i> Search Engine Optimization (SEO) &amp; OpenGraph</h3>
+          <div class="field-group"><label>Site Title (Browser Tab &amp; Google)</label><input type="text" id="seo-title" class="admin-input" placeholder="Sanket Kandel — Full-Stack Developer &amp; Cloud Architect" /></div>
+          <div class="field-group"><label>Meta Description</label><textarea id="seo-desc" class="admin-textarea" rows="2" placeholder="Explore Sanket Kandel's full portfolio..."></textarea></div>
+          <div class="field-group"><label>SEO Keywords (comma separated)</label><input type="text" id="seo-keywords" class="admin-input" placeholder="fullstack, cloud architect, react, next.js, aws" /></div>
+          <div class="field-group"><label>OG Social Share Image URL</label><input type="url" id="seo-og-image" class="admin-input" placeholder="assets/avatar.jpg" /></div>
+        </div>
+
+        <!-- X (TWITTER) AUTOMATION -->
+        <div class="glass-card form-card span-2" id="x-twitter-card" style="border-color: rgba(29,155,240,0.35); background: rgba(29,155,240,0.03);">
+          <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+            <div>
+              <h3><i class="fa-brands fa-x-twitter" style="color:#1d9bf0;"></i> X (Twitter) Auto-Posting Integration</h3>
+              <p class="field-hint" style="margin-top:4px;">Automatically share new tech and AI articles to your X account every morning &amp; evening at 7:00 AM &amp; 7:00 PM NPT.</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span id="x-connection-badge" class="badge badge-amber"><i class="fa-solid fa-circle-notch fa-spin"></i> Checking</span>
+              <label class="toggle-label">
+                <input type="checkbox" id="x-enabled" class="toggle-input" checked />
+                <span class="toggle-track"></span>
+                <span style="font-size:13px;font-weight:600;">Enable Auto-Post</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-grid" style="margin-top:16px;">
+            <div class="field-group">
+              <label>API Key (Consumer Key)</label>
+              <input type="text" id="x-api-key" class="admin-input" placeholder="e.g. 7f8G... or leave blank if using Bearer" />
+            </div>
+            <div class="field-group">
+              <label>API Key Secret (Consumer Secret)</label>
+              <input type="password" id="x-api-secret" class="admin-input" placeholder="••••••••••••••••••••" />
+            </div>
+            <div class="field-group">
+              <label>Access Token</label>
+              <input type="text" id="x-access-token" class="admin-input" placeholder="e.g. 1827...-..." />
+            </div>
+            <div class="field-group">
+              <label>Access Token Secret</label>
+              <input type="password" id="x-access-token-secret" class="admin-input" placeholder="••••••••••••••••••••" />
+            </div>
+            <div class="field-group span-2">
+              <label>OAuth 2.0 Bearer Token (Alternative to OAuth 1.0a above)</label>
+              <input type="password" id="x-bearer-token" class="admin-input" placeholder="Optional: AAAAAAAAAAAAAAAAAAAAA... (requires write permission)" />
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap;">
+            <button type="button" class="btn-save" onclick="saveXSettings()">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Save X Credentials
+            </button>
+            <button type="button" class="btn-sm" id="btn-test-x" style="background:#1d9bf0;color:#fff;" onclick="testXPost()">
+              <i class="fa-brands fa-x-twitter"></i> Send Test Tweet
+            </button>
+            <span class="field-hint" style="margin-left:auto;">
+              <i class="fa-solid fa-circle-info"></i> Requires <strong>Read &amp; Write</strong> permissions in your <a href="https://developer.x.com/en/portal/dashboard" target="_blank" rel="noopener" style="color:#06b6d4;text-decoration:underline;">X Developer Portal</a> app.
+            </span>
+          </div>
+        </div>
+        <div class="glass-card form-card span-2" style="border-color: rgba(124,58,237,0.35); background: rgba(124,58,237,0.04);">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-database gradient-text"></i> Preload / Reset Website Data</h3>
+            <button class="btn-sm" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff;" onclick="seedAllData()"><i class="fa-solid fa-cloud-arrow-down"></i> Preload All Website Data</button>
+          </div>
+          <p class="field-hint" style="margin-top:6px;">Populate all sections (Hero, About, Beliefs, OSS, Tech Stack, Projects, Skills, Blog, Header, Footer, and Contact) with the complete default portfolio data. You can then edit any field and save your changes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MESSAGES -->
+    <section id="section-messages" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-inbox"></i> Contact Messages</h2>
+        <button class="btn-sm danger" onclick="clearMessages()"><i class="fa-solid fa-trash"></i> Clear All</button>
+      </div>
+      <div id="messages-container" class="glass-card">
+        <div class="loading-dots center"><span></span><span></span><span></span></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div id="project-modal" class="modal-overlay hidden" onclick="closeModalOutside(event)">
+  <div class="modal-box glass">
+    <div class="modal-header">
+      <h3 id="project-modal-title">Add Project</h3>
+      <button class="modal-close" onclick="closeProjectModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="proj-editing-id" />
+      <div class="field-group"><label>Project Name</label><input type="text" id="proj-name" class="admin-input" /></div>
+      <div class="field-group"><label>Description</label><textarea id="proj-desc" class="admin-textarea" rows="3"></textarea></div>
+      <div class="form-row-2">
+        <div class="field-group"><label>Category Tags</label><input type="text" id="proj-category" class="admin-input" placeholder="fullstack, cloud" /></div>
+        <div class="field-group"><label>Status</label>
+          <select id="proj-status" class="admin-select">
+            <option value="In Production">In Production</option>
+            <option value="Beta">Beta</option>
+            <option value="In Development">In Development</option>
+            <option value="Archived">Archived</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="field-group"><label>Icon (FA class)</label><input type="text" id="proj-icon" class="admin-input" placeholder="fa-solid fa-cloud" /></div>
+        <div class="field-group"><label>Featured?</label>
+          <label class="toggle-label" style="margin-top:8px">
+            <input type="checkbox" id="proj-featured" class="toggle-input" />
+            <span class="toggle-track"></span>
+            <span>Mark as featured</span>
+          </label>
+        </div>
+      </div>
+      <div class="field-group"><label>Tech Tags (comma separated)</label><input type="text" id="proj-tags" class="admin-input" placeholder="React, Node.js, PostgreSQL" /></div>
+      <div class="form-row-2">
+        <div class="field-group"><label>Live Demo URL</label><input type="url" id="proj-live" class="admin-input" /></div>
+        <div class="field-group"><label>GitHub URL</label><input type="url" id="proj-github" class="admin-input" /></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeProjectModal()">Cancel</button>
+      <button class="btn-save" onclick="saveProject()"><i class="fa-solid fa-check"></i> Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

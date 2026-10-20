@@ -1,0 +1,17 @@
+# Cloudflare & Build Artifacts
+.wrangler/
+**/.wrangler/
+.assetsignore
+node_modules/
+
+# Editor & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Temp & Scratch files
+scratch/
+__pycache__/
+*.pyc

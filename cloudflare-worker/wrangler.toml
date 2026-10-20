@@ -1,0 +1,36 @@
+name = "sk-portfolio-api"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# ─── Environment Variables ───────────────────────────────────────
+# Set these in Cloudflare dashboard > Workers > sk-portfolio-api > Settings > Variables
+# Or use: wrangler secret put ADMIN_EMAIL
+[vars]
+ADMIN_EMAIL = "kandel.sanket@gmail.com"
+SITE_URL = "https://sanketkandel.com.np"
+
+# ─── KV Namespaces ───────────────────────────────────────────────
+# Create these with: wrangler kv:namespace create PORTFOLIO_DATA
+# Then paste the generated ID below
+[[kv_namespaces]]
+binding = "PORTFOLIO_DATA"
+id = "8a3705e47fa74be193f91895f4a72129"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "2fe5f08e8cac414baf20b8facbda673d"
+
+# ─── Routes ──────────────────────────────────────────────────────
+# Routes your Worker to handle /api/* on your domain
+[[routes]]
+pattern = "sanketkandel.com.np/api/*"
+zone_name = "sanketkandel.com.np"
+
+# ─── Cloudflare Workers AI ─────────────────────────────────────────
+[ai]
+binding = "AI"
+
+# ─── Scheduled Daily Blog Generation (Twice daily: 7:00 AM & 7:00 PM NPT / 01:15 & 13:15 UTC) ───────
+[triggers]
+crons = ["15 1 * * *", "15 13 * * *"]
+

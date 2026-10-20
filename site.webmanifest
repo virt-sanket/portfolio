@@ -1,0 +1,26 @@
+{
+  "name": "Sanket Kandel — Software Developer & MSc Computer Science Student",
+  "short_name": "Sanket Kandel",
+  "description": "Portfolio of Sanket Kandel, Software Developer & MSc Computer Science Student at York St John University. Specializing in Python, Cloud Infrastructure, and Full-Stack Engineering.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050914",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "assets/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

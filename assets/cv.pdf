@@ -1,0 +1,53 @@
+%PDF-1.4
+1 0 obj <</Type /Catalog /Pages 2 0 R>> endobj
+2 0 obj <</Type /Pages /Kids [3 0 R] /Count 1>> endobj
+3 0 obj <</Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R>> endobj
+4 0 obj <</Type /Font /Subtype /Type1 /BaseFont /Helvetica>> endobj
+5 0 obj <</Length 6 0 R>> stream
+BT
+/F1 22 Tf
+50 740 Td (SANKET KANDEL) Tj
+/F1 12 Tf
+0 -24 Td (Full-Stack Developer & Cloud Architect) Tj
+/F1 10 Tf
+0 -20 Td (Email: kandel.sanket@gmail.com | Location: Gaindakot, Nepal | Phone: +977 9840505190) Tj
+0 -16 Td (GitHub: https://github.com/virt-sanket | LinkedIn: https://linkedin.com/in/sanketkandel) Tj
+0 -30 Td (PROFESSIONAL SUMMARY) Tj
+0 -16 Td (Full-stack engineer with 5+ years of experience building high-scale web applications,) Tj
+0 -14 Td (cloud infrastructure, and intelligent AI-driven systems. Passionate about clean code,) Tj
+0 -14 Td (resilient system architecture, and stellar user experience.) Tj
+0 -30 Td (CORE SKILLS) Tj
+0 -16 Td (Frontend: React, Next.js, TypeScript, Tailwind CSS, React Native) Tj
+0 -14 Td (Backend: Node.js, Express, Python, FastAPI, GraphQL, REST APIs) Tj
+0 -14 Td (Databases: PostgreSQL, Prisma, MongoDB, Redis) Tj
+0 -14 Td (Cloud & DevOps: AWS, Cloudflare Workers/Pages, Docker, Kubernetes, Terraform) Tj
+0 -30 Td (WORK EXPERIENCE) Tj
+0 -16 Td (Senior Full-Stack Engineer | Independent / Freelance | 2024 - Present) Tj
+0 -14 Td (- Architected cloud-native applications and AI-driven workflows for international clients.) Tj
+0 -14 Td (- Built scalable SaaS infrastructure reducing cloud costs by 35%.) Tj
+0 -20 Td (Full-Stack Developer | Apex Digital Solutions | 2022 - 2024) Tj
+0 -14 Td (- Shipped multi-tenant SaaS features using React, Next.js, Node.js, and AWS.) Tj
+0 -14 Td (- Improved core API response times by 40% and established CI/CD automation.) Tj
+0 -20 Td (Frontend Engineer | WebSphere Tech | 2020 - 2022) Tj
+0 -14 Td (- Built responsive web interfaces for 20+ client projects with high accessibility.) Tj
+0 -30 Td (EDUCATION & CERTIFICATIONS) Tj
+0 -16 Td (- B.Sc. in Computer Science & IT | Tribhuvan University (2018 - 2022)) Tj
+0 -14 Td (- AWS Certified Solutions Architect (2023)) Tj
+0 -14 Td (- Certified Kubernetes Administrator - CKA (2024)) Tj
+ET
+endstream
+endobj
+6 0 obj 1200 endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000244 00000 n 
+0000000318 00000 n 
+0000001550 00000 n 
+trailer <</Size 7 /Root 1 0 R>>
+startxref
+1575
+%%EOF

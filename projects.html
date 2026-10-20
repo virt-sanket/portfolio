@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Projects — Sanket Kandel | Python, Google Cloud, Supabase &amp; MongoDB Atlas</title>
+  <meta name="description" content="Explore Sanket Kandel's software engineering portfolio — backend systems, cloud architectures, and open source projects built with Python, Google Cloud, Supabase, and MongoDB Atlas."/>
+  <link rel="canonical" href="https://sanketkandel.com.np/projects.html" />
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#7c3aed" />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Sanket Kandel Portfolio" />
+  <meta property="og:title" content="Projects — Sanket Kandel | Python, Google Cloud, Supabase &amp; MongoDB Atlas" />
+  <meta property="og:description" content="Production applications, cloud-native backends, and open-source systems developed by Sanket Kandel." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sanketkandel.com.np/projects.html" />
+  <meta property="og:image" content="https://sanketkandel.com.np/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects — Sanket Kandel | Python, Google Cloud, Supabase &amp; MongoDB Atlas" />
+  <meta name="twitter:description" content="Production applications, cloud-native backends, and open-source systems developed by Sanket Kandel." />
+  <meta name="twitter:image" content="https://sanketkandel.com.np/assets/og-image.png" />
+  <meta name="twitter:creator" content="@virt_sanket" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="components.css"/>
+</head>
+<body>
+  <div class="bg-canvas"></div>
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <nav class="c-navbar" id="navbar" data-scrolled="false" aria-label="Main navigation">
+    <a class="c-navbar__logo" id="dyn-header-logo" href="index.html" aria-label="Sanket Kandel — Home">SK</a>
+    <ul class="c-navbar__links" id="nav-links" role="list">
+      <li><a class="c-navbar__link" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
+      <li><a class="c-navbar__link" href="about.html"><i class="fa-solid fa-user" aria-hidden="true"></i> About</a></li>
+      <li><a class="c-navbar__link" href="now.html"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> Now</a></li>
+      <li><a class="c-navbar__link" href="projects.html" aria-current="page"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Projects</a></li>
+      <li><a class="c-navbar__link" href="skills.html"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Skills</a></li>
+      <li><a class="c-navbar__link" href="blog.html"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Blog</a></li>
+      <li><a class="c-navbar__link" href="contact.html"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Contact</a></li>
+    </ul>
+    <div class="c-navbar__cta"><a class="c-navbar__cta-link" id="dyn-hire-btn" href="contact.html">Hire Me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+    <button class="c-navbar__hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="page-hero">
+      <div class="section-tag"><i class="fa-solid fa-cubes"></i> Portfolio &amp; Architecture</div>
+      <h1 class="page-hero-title">My <span class="gradient-text">Projects</span></h1>
+      <p class="page-hero-sub">Production systems and backend capabilities in Python, Google Cloud Platform (GCP), Supabase, and MongoDB Atlas. Engineered for fault-tolerance, low-latency, and scale.</p>
+    </div>
+
+    <div class="section">
+      <!-- Filters -->
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> All</button>
+        <button class="filter-btn" data-filter="python"><i class="fa-brands fa-python"></i> Python &amp; AI</button>
+        <button class="filter-btn" data-filter="cloud"><i class="fa-solid fa-cloud"></i> Google Cloud &amp; Infra</button>
+        <button class="filter-btn" data-filter="database"><i class="fa-solid fa-database"></i> Supabase &amp; Atlas</button>
+        <button class="filter-btn" data-filter="oss"><i class="fa-brands fa-github"></i> Open Source</button>
+      </div>
+
+      <!-- Projects grid -->
+      <div class="projects-grid" id="projects-grid">
+
+        <!-- Featured Project: CloudPortal (Google Cloud & Multi-Cloud SaaS) -->
+        <div class="project-card glass-lg project-featured reveal" data-category="cloud database">
+          <div class="project-visual"><i class="fa-solid fa-cloud icon-gcp"></i></div>
+          <div class="project-content">
+            <div class="featured-label"><i class="fa-solid fa-star"></i> Featured Cloud System</div>
+            <div class="project-title">CloudPortal SaaS Infrastructure</div>
+            <p class="project-desc">A multi-tenant cloud orchestration platform with automated Terraform workflows, cost analytics, and one-click microservice deployments across Google Cloud Platform (GCP Cloud Run) and AWS. Manages over $2M in monthly cloud infrastructure.</p>
+            <div class="project-tags">
+              <span class="project-tag"><i class="fa-brands fa-google icon-gcp"></i> Google Cloud</span>
+              <span class="project-tag"><i class="fa-solid fa-cubes"></i> Terraform</span>
+              <span class="project-tag"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+              <span class="project-tag"><i class="fa-solid fa-layer-group"></i> Next.js 14</span>
+              <span class="project-tag"><i class="fa-solid fa-bolt"></i> Redis</span>
+              <span class="project-tag"><i class="fa-brands fa-docker"></i> Docker</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link">
+                Live Overview <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link secondary">
+                <i class="fa-brands fa-github"></i> GitHub Repo
+              </a>
+              <span class="badge badge-green project-status"><i class="fa-solid fa-circle-check"></i> In Production</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 1: AetherAI (Python + Google Cloud Run) -->
+        <div class="project-card glass reveal" data-category="python cloud">
+          <div class="project-icon"><i class="fa-brands fa-python icon-python"></i></div>
+          <div class="project-title">AetherAI</div>
+          <p class="project-desc">Autonomous code review agent written in Python and FastAPI. Packaged in a containerized pipeline on Google Cloud Run with Vertex AI integration, cutting pull request review turnaround time by 60%.</p>
+          <div class="project-tags">
+            <span class="project-tag"><i class="fa-brands fa-python"></i> Python</span>
+            <span class="project-tag"><i class="fa-brands fa-google"></i> GCP Cloud Run</span>
+            <span class="project-tag"><i class="fa-solid fa-server"></i> FastAPI</span>
+            <span class="project-tag"><i class="fa-solid fa-brain"></i> OpenAI GPT-4</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link">
+              Demo Docs <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link secondary">
+              <i class="fa-brands fa-github"></i> GitHub Repo
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Synapse Workspace (Supabase + pgvector) -->
+        <div class="project-card glass reveal" data-category="database python">
+          <div class="project-icon"><i class="fa-solid fa-database icon-postgres"></i></div>
+          <div class="project-title">Synapse Workspace</div>
+          <p class="project-desc">Real-time collaboration app leveraging Supabase Auth, PostgreSQL Row-Level Security (RLS), and pgvector for semantic search over shared technical documentation.</p>
+          <div class="project-tags">
+            <span class="project-tag"><i class="fa-solid fa-database"></i> Supabase</span>
+            <span class="project-tag"><i class="fa-solid fa-layer-group"></i> Next.js</span>
+            <span class="project-tag"><i class="fa-solid fa-shield-halved"></i> Postgres RLS</span>
+            <span class="project-tag"><i class="fa-solid fa-vector-square"></i> pgvector</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link">
+              Demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link secondary">
+              <i class="fa-brands fa-github"></i> GitHub Repo
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: NovaDash (MongoDB Atlas Telemetry) -->
+        <div class="project-card glass reveal" data-category="database cloud">
+          <div class="project-icon"><i class="fa-solid fa-leaf icon-mongo"></i></div>
+          <div class="project-title">NovaDash</div>
+          <p class="project-desc">High-speed telemetry ingestion and analytics dashboard built on MongoDB Atlas with time-series aggregation pipelines, WebSocket push updates, and interactive D3.js charting.</p>
+          <div class="project-tags">
+            <span class="project-tag"><i class="fa-solid fa-leaf"></i> MongoDB Atlas</span>
+            <span class="project-tag"><i class="fa-brands fa-node-js"></i> Node.js</span>
+            <span class="project-tag"><i class="fa-brands fa-react"></i> React</span>
+            <span class="project-tag"><i class="fa-solid fa-bolt"></i> WebSockets</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link">
+              Demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link secondary">
+              <i class="fa-brands fa-github"></i> GitHub Repo
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: GlassUI (Open Source React Primitives) -->
+        <div class="project-card glass reveal" data-category="oss">
+          <div class="project-icon"><i class="fa-solid fa-wand-magic-sparkles icon-violet"></i></div>
+          <div class="project-title">GlassUI Library</div>
+          <p class="project-desc">An open-source React component library implementing accessible glassmorphism design tokens. Over 3.2k GitHub stars, 180 contributors, and downloaded in over 500 projects worldwide.</p>
+          <div class="project-tags">
+            <span class="project-tag"><i class="fa-brands fa-react"></i> React</span>
+            <span class="project-tag"><i class="fa-solid fa-code"></i> TypeScript</span>
+            <span class="project-tag"><i class="fa-solid fa-book"></i> Storybook</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link">
+              Docs <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link secondary">
+              <i class="fa-brands fa-github"></i> GitHub <i class="fa-solid fa-star icon-amber"></i> 3.2k
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 5: DevFlow CLI (Developer Automation) -->
+        <div class="project-card glass reveal" data-category="cloud oss">
+          <div class="project-icon"><i class="fa-solid fa-terminal icon-cyan"></i></div>
+          <div class="project-title">DevFlow CLI</div>
+          <p class="project-desc">A developer CLI automating multi-cloud container builds, semantic changelog generation, and zero-downtime GitHub release deployments with automated rollbacks.</p>
+          <div class="project-tags">
+            <span class="project-tag"><i class="fa-brands fa-node-js"></i> Node.js</span>
+            <span class="project-tag"><i class="fa-brands fa-python"></i> Python</span>
+            <span class="project-tag"><i class="fa-solid fa-terminal"></i> CLI</span>
+            <span class="project-tag"><i class="fa-brands fa-docker"></i> Docker</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link">
+              NPM <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="project-link secondary">
+              <i class="fa-brands fa-github"></i> GitHub <i class="fa-solid fa-star icon-amber"></i> 870
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Open Source Section -->
+      <div class="section-gap">
+        <div class="section-tag"><i class="fa-brands fa-github"></i> Open Source Ecosystem</div>
+        <h2 class="section-title">Community &amp; <span class="gradient-text">Contributions</span></h2>
+        <p class="section-subtitle">Active contributor to web frameworks, database connectors, and cloud developer tools.</p>
+        <div class="oss-list" id="dyn-oss-list">
+          <div class="oss-item glass reveal">
+            <div class="oss-icon"><i class="fa-brands fa-react icon-cyan"></i></div>
+            <div>
+              <div class="oss-name">facebook/react</div>
+              <div class="oss-desc">Fixed memory leak in concurrent mode scheduler — merged in v18.2</div>
+            </div>
+            <div class="oss-stats">
+              <span class="oss-stat"><i class="fa-solid fa-star icon-amber"></i> 220k</span>
+              <span class="oss-stat"><i class="fa-solid fa-code-pull-request"></i> 3 PRs</span>
+            </div>
+          </div>
+          <div class="oss-item glass reveal">
+            <div class="oss-icon"><i class="fa-solid fa-database icon-violet"></i></div>
+            <div>
+              <div class="oss-name">supabase/supabase</div>
+              <div class="oss-desc">Contributed pgvector query optimization documentation and client edge runtime examples</div>
+            </div>
+            <div class="oss-stats">
+              <span class="oss-stat"><i class="fa-solid fa-star icon-amber"></i> 70k</span>
+              <span class="oss-stat"><i class="fa-solid fa-code-pull-request"></i> 4 PRs</span>
+            </div>
+          </div>
+          <div class="oss-item glass reveal">
+            <div class="oss-icon"><i class="fa-brands fa-google icon-gcp"></i></div>
+            <div>
+              <div class="oss-name">GoogleCloudPlatform/cloud-run-samples</div>
+              <div class="oss-desc">Authored Python FastAPI concurrency benchmarks and container cold-start reduction patterns</div>
+            </div>
+            <div class="oss-stats">
+              <span class="oss-stat"><i class="fa-solid fa-star icon-amber"></i> 14k</span>
+              <span class="oss-stat"><i class="fa-solid fa-code-pull-request"></i> 2 PRs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="c-footer" role="contentinfo">
+      <div class="c-footer__inner">
+        <div class="c-footer__brand">
+          <a class="c-footer__logo" id="dyn-footer-logo" href="index.html">SK</a>
+          <span class="c-footer__tagline" id="dyn-footer-tagline">Building tomorrow's web, today.</span>
+        </div>
+        <nav aria-label="Footer navigation">
+          <ul class="c-footer__links" role="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="now.html">Now</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="c-footer__right">
+          <div class="c-footer__socials">
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="c-footer__social" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+            <a href="https://linkedin.com/in/sanketkandel" target="_blank" rel="noopener noreferrer" class="c-footer__social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+            <a href="mailto:info@sanketkandel.com.np" class="c-footer__social" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+          </div>
+          <span class="c-footer__copy" id="dyn-footer-copy">Crafted with <i class="fa-solid fa-heart icon-pink"></i> by Sanket Kandel · © 2026</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="components.js"></script>
+  <script src="main.js"></script>
+  <script src="tracker.js"></script>
+  <script src="portfolio-loader.js"></script>
+  <script>
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        const cards = document.querySelectorAll('#projects-grid [data-category]');
+        cards.forEach(card => {
+          const cats = card.dataset.category || '';
+          card.style.display = (filter === 'all' || cats.includes(filter)) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

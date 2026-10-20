@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog — Sanket Kandel | Cloud Architecture, Python &amp; Systems</title>
+  <meta name="description"
+    content="Engineering articles and insights by Sanket Kandel on Python, Google Cloud Platform (GCP), Supabase, MongoDB Atlas, distributed systems, and developer tooling." />
+  <link rel="canonical" href="https://sanketkandel.com.np/blog.html" />
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#7c3aed" />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Sanket Kandel Portfolio" />
+  <meta property="og:title" content="Blog — Sanket Kandel | Cloud Architecture, Python &amp; Systems" />
+  <meta property="og:description"
+    content="Engineering deep-dives into Python, Google Cloud Platform (GCP), Supabase, MongoDB Atlas, and distributed systems." />
+  <meta property="og:type" content="blog" />
+  <meta property="og:url" content="https://sanketkandel.com.np/blog.html" />
+  <meta property="og:image" content="https://sanketkandel.com.np/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog — Sanket Kandel | Cloud Architecture, Python &amp; Systems" />
+  <meta name="twitter:description"
+    content="Engineering deep-dives into Python, Google Cloud Platform (GCP), Supabase, MongoDB Atlas, and distributed systems." />
+  <meta name="twitter:image" content="https://sanketkandel.com.np/assets/og-image.png" />
+  <meta name="twitter:creator" content="@virt_sanket" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="components.css" />
+</head>
+
+<body>
+  <div class="bg-canvas"></div>
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <nav class="c-navbar" id="navbar" data-scrolled="false" aria-label="Main navigation">
+    <a class="c-navbar__logo" id="dyn-header-logo" href="index.html" aria-label="Sanket Kandel — Home">SK</a>
+    <ul class="c-navbar__links" id="nav-links" role="list">
+      <li><a class="c-navbar__link" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
+      <li><a class="c-navbar__link" href="about.html"><i class="fa-solid fa-user" aria-hidden="true"></i> About</a></li>
+      <li><a class="c-navbar__link" href="now.html"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> Now</a></li>
+      <li><a class="c-navbar__link" href="projects.html"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Projects</a></li>
+      <li><a class="c-navbar__link" href="skills.html"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Skills</a></li>
+      <li><a class="c-navbar__link" href="blog.html" aria-current="page"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Blog</a></li>
+      <li><a class="c-navbar__link" href="contact.html"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Contact</a></li>
+    </ul>
+    <div class="c-navbar__cta"><a class="c-navbar__cta-link" id="dyn-hire-btn" href="contact.html">Hire Me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+    <button class="c-navbar__hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="page-hero">
+      <div class="section-tag"><i class="fa-solid fa-pen-fancy"></i> Writing &amp; Research</div>
+      <h1 class="page-hero-title">The <span class="gradient-text-pink">Engineering Blog</span></h1>
+      <p class="page-hero-sub">Deep dives into distributed systems, cloud architecture, database internals, and the craft of reliable software.</p>
+    </div>
+
+    <div class="section">
+      <!-- Search and filter -->
+      <div class="filter-bar" id="blog-filter-bar">
+        <button class="filter-btn active" data-category="all"><i class="fa-solid fa-border-all"></i> All Posts</button>
+        <button class="filter-btn" data-category="Cloud & Architecture"><i class="fa-solid fa-cloud"></i> Cloud</button>
+        <button class="filter-btn" data-category="AI & Machine Learning"><i class="fa-solid fa-brain"></i> AI / ML</button>
+        <button class="filter-btn" data-category="React & Frontend"><i class="fa-brands fa-react"></i> Frontend</button>
+        <button class="filter-btn" data-category="DevOps & Tooling"><i class="fa-solid fa-terminal"></i> DevOps</button>
+      </div>
+
+      <!-- Blog posts container populated dynamically by portfolio-loader.js -->
+      <div class="blog-grid" id="dyn-blog-posts" role="list"></div>
+
+      <!-- Newsletter subscription -->
+      <div class="c-newsletter glass-lg reveal">
+        <div class="c-newsletter__icon"><i class="fa-solid fa-paper-plane icon-cyan"></i></div>
+        <h3 class="c-newsletter__title">Stay in the Loop</h3>
+        <p class="c-newsletter__sub">Get real-world engineering articles delivered to your inbox &mdash; no spam, unsubscribe anytime.</p>
+        <form class="c-newsletter__form" onsubmit="handleNewsletter(event)">
+          <input class="c-newsletter__input" type="email" placeholder="your@email.com" required id="nl-email" aria-label="Email address" />
+          <button type="submit" class="c-btn c-btn--primary" id="nl-submit">Subscribe <i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="c-footer" role="contentinfo">
+      <div class="c-footer__inner">
+        <div class="c-footer__brand">
+          <a class="c-footer__logo" id="dyn-footer-logo" href="index.html">SK</a>
+          <span class="c-footer__tagline" id="dyn-footer-tagline">Building tomorrow's web, today.</span>
+        </div>
+        <nav aria-label="Footer navigation">
+          <ul class="c-footer__links" role="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="now.html">Now</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="c-footer__right">
+          <div class="c-footer__socials">
+            <a href="https://github.com/virt-sanket" target="_blank" rel="noopener noreferrer" class="c-footer__social" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+            <a href="https://linkedin.com/in/sanketkandel" target="_blank" rel="noopener noreferrer" class="c-footer__social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+            <a href="mailto:info@sanketkandel.com.np" class="c-footer__social" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+          </div>
+          <span class="c-footer__copy" id="dyn-footer-copy">&copy; 2026 Sanket Kandel</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="components.js"></script>
+  <script src="main.js"></script>
+  <script src="portfolio-loader.js"></script>
+  <script src="tracker.js"></script>
+</body>
+
+</html>
